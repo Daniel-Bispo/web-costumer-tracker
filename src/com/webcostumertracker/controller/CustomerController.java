@@ -8,20 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.webcostumertracker.dao.CustomerDAO;
 import com.webcostumertracker.entity.Customer;
+import com.webcostumertracker.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 	
 	@Autowired
-	private CustomerDAO customerDAO;
+	private CustomerService customerService;
 
 	@GetMapping("/list")
 	public String listCustomers(Model theModel) {
 		
-		List<Customer> theCustomers = customerDAO.getCustomers();
+		// recebe customers da camada de serviço
+		List<Customer> theCustomers = customerService.getCustomers();
 		
 		theModel.addAttribute("customers", theCustomers);
 		
